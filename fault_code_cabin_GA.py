@@ -1,4 +1,3 @@
-
 import difflib
 
 fault_descriptions = {
@@ -30,6 +29,7 @@ fault_descriptions = {
     'Dent.': 71,
     'Corrosion.': 72
 }
+
 Alphabetical_Code_First_Class = {
     'Bottom Cover.':'FA',
     'Leg Rest.' : 'FB',
@@ -57,9 +57,8 @@ Alphabetical_Code_First_Class = {
     'SCU.':'FX',
     'Seat numbering.':'FY',
     'IFE.':'FZ',
-
-
 }
+
 Alphabetical_Code_Business_Class = {
     'Armrest Structure.':'CA',
     'Armcap.':'CB',
@@ -86,8 +85,8 @@ Alphabetical_Code_Business_Class = {
     'Coat hook.':'CX',
     'Magazine rack.':'CY',
     'Pull strap/hinge L/V box.':'CZ',
-    
 }
+
 Alphabetical_Code_Economy_Class = {
     'Armcap.':'YA',
     'Armrest.':'YB',
@@ -98,26 +97,26 @@ Alphabetical_Code_Economy_Class = {
     'Headrest.':'YG',
     'Headrest cover.':'YH',
     'IAT.':'YI',
-    'ottoman.':'YJ',
-    'endbay/fairing.':'YK',
+    'Ottoman.':'YJ',
+    'Endbay/fairing.':'YK',
     'Spair pocket.':'YL',
     'Table.':'YM',
-    'hydrolock.':'YN',
+    'Hydrolock.':'YN',
     'Cable recline.':'YO',
     'Lock table/latch.':'YP',
     'Seat belt.':'YQ',
 }
+
 Alphabetical_Code_IFE = {
+    'Drop down monitor.':'EA',
+    'IFE remote.':'EB',
+    'Media.':'EC',
+    'Seat back monitor.':'ED',
+    'Wall mounted LCD.':'EE',
+    'WIFI.':'EF',
+    'A/M or underseat video.':'EG',
+}
 
-'Drop down monitor.':'EA',
-'IFE remote.':'EB',
-'Media.':'EC',
-'Seat back monitor.':'ED',
-'Wall mounted LCD':'EE',
-'WIFI.':'EF',
-'A/M or udseat vid.':'EG',
-
- }
 Alphabetical_Code_Galley = {
     'Air Chiller.':'GA',
     'Bun Warmer.':'GB',
@@ -132,7 +131,7 @@ Alphabetical_Code_Galley = {
     'Spigot.':'GK',
     'Zink strainer/screen top.':'GL',
     'Waste trolley.':'GM',
-    'Waste flapper':'GN',
+    'Waste flapper.':'GN',
     'Water boiler.':'GO',
     'Wine chiller.':'GP',
     'Hot Jug.':'GQ',
@@ -140,11 +139,12 @@ Alphabetical_Code_Galley = {
     'Drawer-ice.':'GS',
     'Water filter cartridge.':'GT',
 }
+
 Alphabetical_Code_Lavatory = {
-    'Aminities Box.':'VA',
+    'Amenities Box.':'VA',
     'Drain Plug.':'VB',
     'Faucet.':'VC',
-    'Lavatory call speaker,':'VD',
+    'Lavatory call speaker.':'VD',
     'Lavatory ceiling.':'VE',
     'Lavatory Cover.':'VF',
     'Lavatory door.':'VG',
@@ -155,59 +155,61 @@ Alphabetical_Code_Lavatory = {
     'Occupied Sign.':'VL',
     'Tissue Holder/Box.':'VM',
     'Wash Basin.':'VN',
-    'Flushing switch/ Micro Switch.':'VO',
+    'Flushing switch/Micro Switch.':'VO',
     'Water filter.':'VP',
     'Vacuum Blower.':'VQ',
-    'Plumbing System/ Tubing (hose).':'VR',
-    'toilet assy.':'VS',
-
+    'Plumbing System/Tubing (hose).':'VR',
+    'Toilet assy.':'VS',
 }
 
+class_codes = {
+    'First class': Alphabetical_Code_First_Class,
+    'Business class': Alphabetical_Code_Business_Class,
+    'Economy class': Alphabetical_Code_Economy_Class,
+    'IFE': Alphabetical_Code_IFE,
+    'Galley': Alphabetical_Code_Galley,
+    'Lavatory': Alphabetical_Code_Lavatory
+}
 
-
-import difflib
-
-
-while True:
-    user_input = input("Enter fault description: ")
-    user_input1 = input("Class of item: ")
-
-    if user_input.lower() == "exit":
-        break
-
-    class_dict = None  
-
-    if user_input1 == "First class":
-        class_dict = Alphabetical_Code_First_Class
-    elif user_input1 == "Business class":
-        class_dict = Alphabetical_Code_Business_Class
-    elif user_input1 == "Economy class":
-        class_dict = Alphabetical_Code_Economy_Class
-    elif user_input1 == "IFE":
-        class_dict = Alphabetical_Code_IFE
-    elif user_input1 == "Galley":
-        class_dict = Alphabetical_Code_Galley
-    elif user_input1 == "lavatory":
-        class_dict = Alphabetical_Code_Lavatory
+def get_closest_match(user_input, data_dict):
+    matches = difflib.get_close_matches(user_input, data_dict.keys(), n=1, cutoff=0.5)
+    if matches:
+        return matches[0], data_dict[matches[0]]
     else:
-        print("No matching Item Class")
-        continue
+        return None, None
 
-    if class_dict:  
-        close_matches = difflib.get_close_matches(user_input1, class_dict.keys(), n=1, cutoff=0.5)
-        if close_matches:
-            closest_match = close_matches[0]
-            fault_code = class_dict[closest_match]
-            print(f"Error code for '{closest_match}' is {fault_code}.")
+def main():
+    while True:
+        print("\nEnter 'exit' at any time to quit.")
+        
+        fault_input = input("Enter fault description: ").strip()
+        if fault_input.lower() == 'exit':
+            break
+        
+        class_input = input("Enter class of item (e.g., First class, Business class, Economy class, IFE, Galley, Lavatory): ").strip()
+        if class_input.lower() == 'exit':
+            break
+        
+        item_input = input("Enter item description: ").strip()
+        if item_input.lower() == 'exit':
+            break
+        
+        fault_match, fault_code = get_closest_match(fault_input, fault_descriptions)
+        if fault_code:
+            print("Code found")
         else:
-            print("No matching item code in this class")
-    else:
-        print("No matching Item Class")
+            print("No matching fault description found.")
+        
+        class_dict = class_codes.get(class_input)
+        if not class_dict:
+            print("No matching item class found.")
+            continue
+        
+        item_match, item_code = get_closest_match(item_input, class_dict)
+        if item_code:
+            print(f"Fault code is {fault_code}{item_code}")
+        else:
+            print("No matching item description found in the specified class.")
 
-    close_matches = difflib.get_close_matches(user_input, fault_descriptions.keys(), n=1, cutoff=0.5)
-    if close_matches:
-        closest_match = close_matches[0]
-        error_code = fault_descriptions[closest_match]
-        print(f"Error code for '{closest_match}' is {error_code}.")
-    else:
-        print("No matching fault description found.")
+if __name__ == "__main__":
+    main()
