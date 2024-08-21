@@ -211,3 +211,4 @@ while True:
         print(f"Error code for '{closest_match}' is {error_code}.")
     else:
         print("No matching fault description found.")
+
