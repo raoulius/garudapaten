@@ -213,10 +213,4 @@ def main():
     else:
         print("No matching Item Class")
 
-    close_matches = difflib.get_close_matches(user_input, fault_descriptions.keys(), n=1, cutoff=0.5)
-    if close_matches:
-        closest_match = close_matches[0]
-        error_code = fault_descriptions[closest_match]
-        print(f"Error code for '{closest_match}' is {error_code}.")
-    else:
-        print("No matching fault description found.")
+   
