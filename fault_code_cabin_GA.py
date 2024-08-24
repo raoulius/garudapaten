@@ -172,7 +172,7 @@ class_codes = {
 }
 
 def get_closest_match(user_input, data_dict):
-    matches = difflib.get_close_matches(user_input, data_dict.keys(), n=1, cutoff=0.5)
+    matches = difflib.get_close_matches(user_input, data_dict.keys(), n=1, cutoff=0.6)
     if matches:
         return matches[0], data_dict[matches[0]]
     else:
@@ -194,24 +194,25 @@ def main():
         if item_input.lower() == 'exit':
             break
         
+        # Get fault code
         fault_match, fault_code = get_closest_match(fault_input, fault_descriptions)
         if fault_code:
-            print("Code found")
+            print(f"Fault code for '{fault_match}' is: {fault_code}")
         else:
             print("No matching fault description found.")
         
+        # Get class dictionary
         class_dict = class_codes.get(class_input)
         if not class_dict:
             print("No matching item class found.")
             continue
         
+        # Get item code
         item_match, item_code = get_closest_match(item_input, class_dict)
         if item_code:
-            print(f"Fault code is {fault_code}{item_code}")
+            print(f"Item code for '{item_match}' in '{class_input}' is: {item_code}")
         else:
-            print("No matching item code in this class")
-    else:
-        print("No matching Item Class")
-# ini cara run nya gimana @raoulious
+            print("No matching item description found in the specified class.")
 
-   
+if __name__ == "__main__":
+    main()
