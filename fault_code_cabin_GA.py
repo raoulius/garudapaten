@@ -210,7 +210,7 @@ def main():
         # Get item code
         item_match, item_code = get_closest_match(item_input, class_dict)
         if item_code:
-            print(f"Item code for '{item_match}' in '{class_input}' is: {item_code}")
+            print(f"Faultcode is: {fault_code}{item_code}")
         else:
             print("No matching item description found in the specified class.")
 
