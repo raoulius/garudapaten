@@ -212,6 +212,5 @@ def main():
             print("No matching item code in this class")
     else:
         print("No matching Item Class")
-# ini cara run nya gimana @raoulious
 
    
