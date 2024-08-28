@@ -57,6 +57,7 @@ Alphabetical_Code_First_Class = {
     'SCU.':'FX',
     'Seat numbering.':'FY',
     'IFE.':'FZ',
+    'reading light.':'FJ',
 }
 
 Alphabetical_Code_Business_Class = {
@@ -85,6 +86,8 @@ Alphabetical_Code_Business_Class = {
     'Coat hook.':'CX',
     'Magazine rack.':'CY',
     'Pull strap/hinge L/V box.':'CZ',
+    'snake light.':'CU',
+    'reading light.':'CV',
 }
 
 Alphabetical_Code_Economy_Class = {
@@ -162,13 +165,38 @@ Alphabetical_Code_Lavatory = {
     'Toilet assy.':'VS',
 }
 
+Alphabetical_Code_Lighting = {
+    'Ceiling light.': 'LA',
+    'entry light.': 'LB',
+    'Galley/area light.':'LC',
+    'Lavatory light.':'LD',
+    'window/sidewall light,':'LE',
+    'TTOL light.':'LF',
+    'Work light.':'LG',
+    'emergency light.':'LH',
+    'lavatory mirror light.':'LI',
+    'gasper light.':'SC',
+    'No smking & FSB light.':'SD',
+    'Reading light.':'SF',
+    'Seat numbering light.':'SG',
+}
+
+Alphabetical_Code_Lugbin = {
+    'Lugbin.':'NE',
+    'latch.':'NJ',
+    'hinge snubber.':'NK',
+    'List trim.':'NL',
+}
 class_codes = {
     'First class': Alphabetical_Code_First_Class,
     'Business class': Alphabetical_Code_Business_Class,
     'Economy class': Alphabetical_Code_Economy_Class,
     'IFE': Alphabetical_Code_IFE,
     'Galley': Alphabetical_Code_Galley,
-    'Lavatory': Alphabetical_Code_Lavatory
+    'Lavatory': Alphabetical_Code_Lavatory,
+    'Lighting' :Alphabetical_Code_Lighting,
+    'Lugbin' : Alphabetical_Code_Lugbin,
+
 }
 
 def get_closest_match(user_input, data_dict):
@@ -186,7 +214,7 @@ def main():
         if fault_input.lower() == 'exit':
             break
         
-        class_input = input("Enter class of item (e.g., First class, Business class, Economy class, IFE, Galley, Lavatory): ").strip()
+        class_input = input("Enter class of item (e.g., First class, Business class, Economy class, IFE, Galley, Lavatory, Lighting, Lugbin): ").strip()
         if class_input.lower() == 'exit':
             break
         

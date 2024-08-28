@@ -217,7 +217,7 @@ def main(page: ft.Page):
             result_message += "No matching fault description found.\n"
         
         if item_code:
-            result_message += f"Faultcode is: {fault_code}{item_code}\n"
+            result_message += f"Faultcode is: {item_code}{fault_code}\n"
         else:
             result_message += "No matching item description found in the specified class."
 
